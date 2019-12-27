@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'login_number.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -79,7 +80,8 @@ class _LoginPageState extends State<LoginPage> {
                           Text(
                             " and ",
                             style: TextStyle(
-                                color: Colors.white, fontWeight: FontWeight.bold),
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           ),
                           Text(
                             "Privacy Policy",
@@ -109,21 +111,27 @@ class _LoginPageState extends State<LoginPage> {
                               fontSize: 16),
                         ),
                       ),
-                      Container(
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
-                        margin: EdgeInsets.fromLTRB(24, 0, 24, 10),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.white, width: 2),
-                            borderRadius: BorderRadius.circular(26)),
-                        child: Text(
-                          "LOG IN WITH PHONE NUMBER",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => LoginNumber("IN", "+91")));
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
+                          margin: EdgeInsets.fromLTRB(24, 0, 24, 10),
+                          decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              border: Border.all(color: Colors.white, width: 2),
+                              borderRadius: BorderRadius.circular(26)),
+                          child: Text(
+                            "LOG IN WITH PHONE NUMBER",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -151,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             width: 3,
                           ),
-                          Icon(Icons.keyboard_arrow_down,color: Colors.white,),
+                          Icon(Icons.keyboard_arrow_down, color: Colors.white,),
                         ],
                       ),
                       SizedBox(height: 8,),
