@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "98344109697",
+    "firebase_url": "https://flutter-tinder-clone.firebaseio.com",
+    "project_id": "flutter-tinder-clone",
+    "storage_bucket": "flutter-tinder-clone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98344109697:android:0940b4870da045be6a2f80",
+        "android_client_info": {
+          "package_name": "com.rnatechlabs.flutter_tinder_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "98344109697-4nam334m0ksa6u1f6rloav0hj7r86mdl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rnatechlabs.flutter_tinder_clone",
+            "certificate_hash": "b658f396b980dfa4344cf41c219b2d9ce276d751"
+          }
+        },
+        {
+          "client_id": "98344109697-csamn8cetevi1nbo4tlll6sof6g0c5uo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALczPkiSMlccw-JLJob2Dqpj84AhrvUOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "98344109697-csamn8cetevi1nbo4tlll6sof6g0c5uo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

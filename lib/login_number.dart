@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'login_google.dart';
+import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginNumber extends StatefulWidget {
   final String _countryCode;
@@ -51,7 +54,7 @@ class _LoginNumberState extends State<LoginNumber> {
         children: <Widget>[
           SafeArea(
             child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
               },
               child: Container(
@@ -166,11 +169,37 @@ class _LoginNumberState extends State<LoginNumber> {
                   ],
                 ),
                 SizedBox(
+                  height: 16,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      "Change your phone number?",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginGoogle()));
+                      },
+                      child: Text(
+                        "LOGIN BY EMAIL",
+                        style: TextStyle(
+                            color: Colors.red[400],
+                            decoration: TextDecoration.underline),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
                   height: 36,
                 ),
                 GestureDetector(
                   onTap: () {
-                    if(_gradientForButton==true){
+                    if (_gradientForButton == true) {
                       //Navigator.push(context, MaterialPageRoute(builder: null));
                     }
                   },

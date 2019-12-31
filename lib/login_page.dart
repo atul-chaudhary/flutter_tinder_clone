@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'login_number.dart';
+import 'tinderHomePage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -8,6 +11,40 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final FacebookLogin fbLogin = new FacebookLogin();
+  bool isFacebookLoginIn = false;
+  String errorMessage = '';
+  String successMessage = '';
+
+  Future<FirebaseUser> facebookLogin(BuildContext context) async {
+    FirebaseUser currentUser;
+    // fbLogin.loginBehavior = FacebookLoginBehavior.webViewOnly;
+    // if you remove above comment then facebook login will take username and pasword for login in Webview
+    try {
+      final FacebookLoginResult facebookLoginResult =
+          await fbLogin.logIn(['email']);
+      if (facebookLoginResult.status == FacebookLoginStatus.loggedIn) {
+        FacebookAccessToken facebookAccessToken =
+            facebookLoginResult.accessToken;
+        AuthCredential credential = FacebookAuthProvider.getCredential(
+            accessToken: facebookAccessToken.token);
+        FirebaseUser user = (await auth.signInWithCredential(credential)).user;
+        print("signed in" + user.displayName);
+        return user;
+      }
+    } catch (e) {
+      print(e);
+    }
+    return currentUser;
+  }
+
+  Future<bool> facebookLoginout() async {
+    await auth.signOut();
+    await fbLogin.logOut();
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,29 +129,63 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ],
                       ),
-                      Container(
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
-                        margin: EdgeInsets.fromLTRB(24, 20, 24, 10),
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                                colors: [Colors.indigo[800], Colors.blue],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight),
-                            borderRadius: BorderRadius.circular(26)),
-                        child: Text(
-                          "LOG IN WITH FACEBOOK",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                      GestureDetector(
+                        onTap: () {
+                          facebookLogin(context).then((user) {
+                            if (user != null) {
+                              print('Logged in successfully.');
+                              setState(() {
+                                isFacebookLoginIn = true;
+                                successMessage =
+                                    'Logged in successfully.\nEmail : ${user.email}\nYou can now navigate to Home Page.';
+                              });
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TinderHomepage()));
+                            } else {
+                              print('Error while Login.');
+                            }
+                          });
+
+                          // second functionality
+//                          fbLogin.logIn(['email']).then((result){
+//                            switch (result.status){
+//                              case FacebookLoginStatus.loggedIn:
+//                                FirebaseAuth.instance.signInWithCredential(result.accessToken.token)
+//                            }
+//                          }).catchError( (e){
+//                              print(e);
+//                          });
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.fromLTRB(0, 16, 0, 16),
+                          margin: EdgeInsets.fromLTRB(24, 20, 24, 10),
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: [Colors.indigo[800], Colors.blue],
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight),
+                              borderRadius: BorderRadius.circular(26)),
+                          child: Text(
+                            "LOG IN WITH FACEBOOK",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
                         ),
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => LoginNumber("IN", "+91")));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      LoginNumber("IN", "+91")));
                         },
                         child: Container(
                           width: double.infinity,
@@ -159,10 +230,15 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             width: 3,
                           ),
-                          Icon(Icons.keyboard_arrow_down, color: Colors.white,),
+                          Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.white,
+                          ),
                         ],
                       ),
-                      SizedBox(height: 8,),
+                      SizedBox(
+                        height: 8,
+                      ),
                     ],
                   ),
                 ),
