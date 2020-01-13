@@ -1,6 +1,6 @@
 # flutter_tinder_clone
 
-A new Flutter application.
+fluter tinder clone is a complete clone of the famous dating App tinder with complete backend backed by firebae.
 
 ## Getting Started
 
