@@ -17,6 +17,9 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  camera: ^0.5.7+3
+  path_provider: ^1.5.1
+  path: ^1.6.4
   firebase_auth:
   cloud_firestore:
   firebase_core:
