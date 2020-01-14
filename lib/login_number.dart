@@ -180,7 +180,7 @@ class _LoginNumberState extends State<LoginNumber> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => LoginGoogle()));

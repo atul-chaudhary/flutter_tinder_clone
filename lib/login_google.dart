@@ -53,8 +53,11 @@ class _LoginGoogleState extends State<LoginGoogle> {
                 _handleSignIn()
                     .then((FirebaseUser user) => print(user))
                     .catchError((e) => print(e));
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TinderHomepage()));
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => TinderHomepage()),
+                      (Route<dynamic> route) => false,
+                );
               },
               child: Container(
                 //width: double.infinity,
