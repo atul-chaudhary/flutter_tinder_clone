@@ -28,7 +28,8 @@ class _TinderHomepageState extends State<TinderHomepage> {
             flexibleSpace: new Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                new TabBar(unselectedLabelColor: Colors.grey,
+                new TabBar(
+                  unselectedLabelColor: Colors.grey,
                   labelColor: Colors.red[400],
                   tabs: [
                     new Tab(
