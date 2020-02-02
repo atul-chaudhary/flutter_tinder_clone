@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_tinder_clone/account_tab.dart';
 import 'package:flutter_tinder_clone/chat_tab.dart';
+import 'swipe_functionality/tinder_swipe.dart';
 
 class TinderHomepage extends StatefulWidget {
   @override
@@ -10,10 +11,33 @@ class TinderHomepage extends StatefulWidget {
 
 class _TinderHomepageState extends State<TinderHomepage> {
   TabController _tabController;
+  bool switchSelect = false;
 
   @override
   void initState() {
     super.initState();
+  }
+
+  Widget customSwitch({bool select}) {
+    return (select == true)
+        ? Transform.scale(
+            scale: 2.0,
+            child: Switch(
+              value: switchSelect,
+              onChanged: (value) {
+                print(value);
+                print(switchSelect);
+                setState(() {
+                  switchSelect = value;
+                  print(switchSelect);
+                });
+              },
+              activeThumbImage: AssetImage("assets/tinder.png"),
+            ),
+          )
+        : ImageIcon(
+            AssetImage("assets/tinder_grey.png"),
+          );
   }
 
   @override
@@ -24,11 +48,13 @@ class _TinderHomepageState extends State<TinderHomepage> {
         length: 3,
         child: new Scaffold(
           appBar: new AppBar(
+            elevation: 2.0,
             backgroundColor: Colors.white,
             flexibleSpace: new Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 new TabBar(
+                  indicator: BoxDecoration(color: Colors.transparent),
                   unselectedLabelColor: Colors.grey,
                   labelColor: Colors.red[400],
                   tabs: [
@@ -39,9 +65,11 @@ class _TinderHomepageState extends State<TinderHomepage> {
                       ),
                     )),
                     new Tab(
-                        icon: ImageIcon(
-                      AssetImage("assets/tinder_grey.png"),
-                    )),
+                      icon: ImageIcon(
+                        AssetImage("assets/tinder_grey.png"),
+                      ),
+//                      child: customSwitch(select: true),
+                    ),
                     new Tab(
                         icon: ImageIcon(
                       AssetImage("assets/chat_icon.png"),
@@ -54,9 +82,7 @@ class _TinderHomepageState extends State<TinderHomepage> {
           body: TabBarView(
             children: <Widget>[
               AccountTab(),
-              new Column(
-                children: <Widget>[new Text("Cart Page")],
-              ),
+              TinderSwipe(),
               ChatTab(),
             ],
           ),
