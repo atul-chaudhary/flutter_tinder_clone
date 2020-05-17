@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: 3,
                   ),
                   Text(
-                    "tinder",
+                    "Flutter tinder",
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

@@ -21,7 +21,7 @@ dependencies:
   #path_provider: ^1.5.1
   #path: ^1.6.4
   #tinder_card: ^0.1.1
-  #flutter_tindercard: ^0.1.8
+  flutter_tindercard: ^0.1.8
   fluttery_dart2: ^0.0.9
   carousel_slider: ^1.4.1
   image_picker: ^0.6.3
